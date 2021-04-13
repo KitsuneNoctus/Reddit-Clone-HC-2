@@ -55,5 +55,5 @@ describe('Posts', function() {
   
   after(function () {
     Post.findOneAndDelete(newPost);
-  });  
+  }); 
 });

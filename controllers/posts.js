@@ -6,10 +6,13 @@ module.exports = (app) => {
   app.post('/posts/new', (req, res) => {
     // INSTANTIATE INSTANCE OF POST MODEL
     const post = new Post(req.body);
+    // console.log(post)
 
     // SAVE INSTANCE OF POST MODEL TO DB
     post.save((err, post) => {
       // REDIRECT TO THE ROOT
+      // console.log(err)
+      // console.log(post)
       return res.redirect(`/`);
     })
   });
@@ -35,4 +38,16 @@ module.exports = (app) => {
       });
   });
 
+  // SUBREDDIT
+  app.get("/n/:subreddit", function(req, res) {
+    Post.find({ subreddit: req.params.subreddit }).lean()
+    .then(posts => {
+      res.render("posts-index", { posts });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  });
+
 };
+

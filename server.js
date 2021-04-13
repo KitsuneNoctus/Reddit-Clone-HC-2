@@ -20,20 +20,20 @@ app.use(express.static('public'));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+// Routes
+// app.get('/', (req, res) => {
+//     res.render('home')
+// });
+
+app.get('/posts/new', (req, res) => {
+    res.render('posts-new')
+}); 
+
 // Controllers
 require('./controllers/posts.js')(app);
 
 // Set db
 require('./data/reddit-db');
-
-// Routes
-app.get('/', (req, res) => {
-    res.render('home')
-});
-
-app.get('/posts/new', (req, res) => {
-    res.render('posts-new')
-}); 
 
 // Start Server
 app.listen(3000, () => {
