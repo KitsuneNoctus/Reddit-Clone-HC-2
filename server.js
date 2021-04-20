@@ -2,6 +2,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+// Set db
+require('./data/reddit-db');
 
 // App Setup
 const app = express();
@@ -12,9 +14,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Add after body parser initialization!
 app.use(expressValidator());
-
-// Set db
-require('./data/reddit-db');
 
 // Middleware
 const exphbs  = require('express-handlebars');
