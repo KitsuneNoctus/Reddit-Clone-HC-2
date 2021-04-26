@@ -1,4 +1,7 @@
 // Require Libraries
+require('dotenv').config();
+var cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 const express = require('express');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
@@ -14,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Add after body parser initialization!
 app.use(expressValidator());
+app.use(cookieParser()); // Add this after you initialize express.
 
 // Middleware
 const exphbs  = require('express-handlebars');
@@ -30,6 +34,7 @@ app.get('/posts/new', (req, res) => {
 // Controllers
 require('./controllers/posts.js')(app);
 require('./controllers/comments.js')(app);
+require('./controllers/auth.js')(app);
 
 // Start Server
 app.listen(3000, () => {
